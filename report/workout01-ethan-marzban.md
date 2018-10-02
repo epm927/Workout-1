@@ -18,3 +18,14 @@ mkdir code
 mkdir output
 mkdir report
 ```
+
+After a series of commands in the terminal (initializing, configuring, etc.), I have pushed the necessary files into my [repository](https://github.com/epm927/Workout-1.git).
+
+### Downloading the Data:
+
+Using the `curl -O` command (in the terminal, inside the `data/` folder), I downloaded the data.
+
+ 
+
+2) Create a **`README`** file
+-----------------------------

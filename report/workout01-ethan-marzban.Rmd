@@ -22,3 +22,27 @@ mkdir code
 mkdir output
 mkdir report
 ```
+
+After a series of commands in the terminal (initializing, configuring, etc.), I have pushed the necessary files into my [repository](https://github.com/epm927/Workout-1.git). 
+
+### Downloading the Data:
+
+Using the `curl -O` command (in the terminal, inside the `data/` folder), I downloaded the data.
+
+
+\ 
+
+## 2) Create a **`README`** file
+
+I added some text to the README file, outlining the goals of this project as well as dating the project. 
+
+\ 
+
+## 3) Create a Data Dictionary
+
+I used the command `touch nba2018-dictionary.md` (while inside the `data/` directory) to create a blank data dictionary. Using `open`, I opened the file (using LaTeX, by default) and edited the dictionary. To examine the data, I will import it here into `R`, and perform exploration:
+
+```{r}
+dat <- read.csv("../data/nba2018.csv")
+length(dat)
+```
