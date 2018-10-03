@@ -1,0 +1,20 @@
+## Title: Short Title#
+# This is the code involved with preprocessing the data.#
+# Inputs:#
+# Outputs:#
+#
+dat <- read.csv("../data/nba2018.csv")
+## Title: Short Title#
+# This is the code involved with preprocessing the data.#
+# Inputs:#
+# Outputs:#
+#
+dat <- read.csv("../data/nba2018.csv")
+## Title: Short Title#
+# This is the code involved with preprocessing the data.#
+# Inputs:#
+# Outputs:#
+#
+dat <- read.csv("../data/nba2018.csv")#
+#
+dat

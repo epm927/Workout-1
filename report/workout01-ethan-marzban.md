@@ -29,3 +29,25 @@ Using the `curl -O` command (in the terminal, inside the `data/` folder), I down
 
 2) Create a **`README`** file
 -----------------------------
+
+I added some text to the README file, outlining the goals of this project as well as dating the project.
+
+ 
+
+3) Create a Data Dictionary
+---------------------------
+
+I used the command `touch nba2018-dictionary.md` (while inside the `data/` directory) to create a blank data dictionary. Using `open`, I opened the file (using LaTeX, by default) and edited the dictionary. To examine the data, I will import it here into `R`, and perform exploration:
+
+``` r
+dat <- read.csv("../data/nba2018.csv")
+length(dat[,1])
+```
+
+    ## [1] 477
+
+Looks like there are 477 lines of data. After adding this information to the dictionary, I added, committed, and pushed everything onto the repository again.
+
+ 
+
+Now I switch to an `R` script. See you on the flipside!

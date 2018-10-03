@@ -44,5 +44,11 @@ I used the command `touch nba2018-dictionary.md` (while inside the `data/` direc
 
 ```{r}
 dat <- read.csv("../data/nba2018.csv")
-length(dat)
+length(dat[,1])
 ```
+
+Looks like there are 477 lines of data. After adding this information to the dictionary, I added, committed, and pushed everything onto the repository again.
+
+\ 
+
+Now I switch to an `R` script. See you on the flipside!
