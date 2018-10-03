@@ -1,1 +1,1 @@
-# Welcome to the README file! This file is associated with Workout 1 (Stat 133, Fall 2018). We will be downloading and manipulating the same NBA data file we have previously seen, and will be ranking teams (I believe). 
+### Welcome to the README file! This file is associated with Workout 1 (Stat 133, Fall 2018). We will be downloading and manipulating the same NBA data file we have previously seen, and will be ranking teams (I believe). 
