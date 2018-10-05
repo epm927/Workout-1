@@ -3,6 +3,25 @@ Workout 1
 Ethan M.
 October 2, 2018
 
+``` r
+library(dplyr)
+```
+
+    ## 
+    ## Attaching package: 'dplyr'
+
+    ## The following objects are masked from 'package:stats':
+    ## 
+    ##     filter, lag
+
+    ## The following objects are masked from 'package:base':
+    ## 
+    ##     intersect, setdiff, setequal, union
+
+``` r
+library(ggplot2)
+```
+
 1) File Structure
 -----------------
 
@@ -51,3 +70,138 @@ Looks like there are 477 lines of data. After adding this information to the dic
  
 
 Now I switch to an `R` script. See you on the flipside!
+
+ 
+
+5) Ranking of Teams
+-------------------
+
+Let's now import our nba2018-teams.csv file
+
+``` r
+dat <- read.csv("../data/nba2018-teams.csv")
+length(dat[,1])
+```
+
+    ## [1] 30
+
+### Basic Rankings
+
+#### Ranked by Salary:
+
+First we create `by.salary`, a variable which has the teams odered in decreasing order of salary:
+
+``` r
+by.salary <- arrange(dat, desc(salary))
+df <- data.frame(by.salary)
+```
+
+Now we plot:
+
+``` r
+ggplot(df, aes(x= reorder(team, salary), y = salary)) +
+  geom_bar(stat='identity') +
+  coord_flip() +
+  labs(
+    title = "NBA Teams ranked by Salary",
+    y = "Salary (in millions)",
+    x = "Team"
+  ) + 
+  geom_hline(yintercept = mean(df$salary), col = "red", size = 2, alpha = 0.5)
+```
+
+![](workout01-ethan-marzban_files/figure-markdown_github-ascii_identifiers/salary_ranking-1.png)
+
+ 
+
+#### Ranked by Total Points:
+
+``` r
+by.points <- arrange(dat, desc(points))
+df2 <- data.frame(by.points)
+```
+
+``` r
+ggplot(df2, aes(x= reorder(team, points), y = points)) +
+  geom_bar(stat='identity') +
+  coord_flip() +
+  labs(
+    title = "NBA Teams ranked by Total Points",
+    y = "Total Points",
+    x = "Team"
+  ) + 
+  geom_hline(yintercept = mean(df2$points), col = "red", size = 2, alpha = 0.5)
+```
+
+![](workout01-ethan-marzban_files/figure-markdown_github-ascii_identifiers/points_ranking-1.png)
+
+ 
+
+#### Ranked by Efficiencies
+
+``` r
+by.eff <- arrange(dat, desc(efficiency))
+df3 <- data.frame(by.eff)
+```
+
+``` r
+ggplot(df3, aes(x= reorder(team, efficiency), y = efficiency)) +
+  geom_bar(stat='identity') +
+  coord_flip() +
+  labs(
+    title = "NBA Teams ranked by Efficiency",
+    y = "Efficiency",
+    x = "Team"
+  ) + 
+  geom_hline(yintercept = mean(df3$efficiency), col = "red", size = 2, alpha = 0.5)
+```
+
+![](workout01-ethan-marzban_files/figure-markdown_github-ascii_identifiers/efficiency_ranking-1.png)
+
+#### A new ranking: Experience-Efficiency
+
+Let's define a new index: the "experience-efficiency" index, denoted *ε* and defined as
+$$\\varepsilon = \\frac{\\text{Efficiency} + \\text{Experience}}{2} $$
+ I wanted to create an index that included both efficiencies and experiences- averaging these two values made the most sense.
+
+We first then need to mutate the original data to include this new ranking:
+
+``` r
+dat.2 <- mutate(dat, epsilon = (efficiency + experience)/2)
+```
+
+Now we can proceed as we did in previous rankings:
+
+``` r
+by.eps <- arrange(dat.2, desc(epsilon))
+df4 <- data.frame(by.eps)
+```
+
+``` r
+ggplot(df4, aes(x= reorder(team, epsilon), y = epsilon)) +
+  geom_bar(stat='identity') +
+  coord_flip() +
+  labs(
+    title = "NBA Teams ranked by Experience-Efficiency (epsilon)",
+    y = "Epsilon",
+    x = "Team"
+  ) + 
+  geom_hline(yintercept = mean(df4$epsilon), col = "red", size = 2, alpha = 0.5)
+```
+
+![](workout01-ethan-marzban_files/figure-markdown_github-ascii_identifiers/epsilon_ranking-1.png)
+
+Note some of the differences between ranking by efficiency and ranking by *ε*; the experience-efficiency index benefitted teams with slightly lower efficiencies but higher experience points. For example, in a pure efficiency ranking `PHI` is ranked the lowes whereas under an experience-efficiency ranking `PHI` moves up in ranking to the middle.
+
+ 
+
+### Comments and Reflections:
+
+-   This was my first time working on a project with such a file structure. I found it particularl illuminating, though, and really enjoyed getting a flavor of how more complicated filestructures work (I suspect that in the "real world" one frequently encounters even more complicated structures!)
+-   Yes, this was my first time using relative paths. Having many different levels enabled me to get practice with specifying relative paths, and navigating through different directories in the Terminal. As such, I feel much more confident in using them, and can definitely see their benefit!
+-   I have used R scripts in the past, but only for very basic codes (for example, importing data sets and producing plots, or defining functions and plotting those).
+-   Initially, getting used to relative paths was challenging, but I think I got the hang of things. I also had a small bug in one of my loops (I had used `i <= i + 1` instead of `i <- i + 1`), and spent probably half an hour trying to figure out why my code just kept running but never stopping! \[Finally I went to Office Hours and one of the GSI's spotted the mistake... so thank you!\]
+-   Even though we did cover this in class, I feel like I'm getting better at using `arrange` and other `dplyr` functions. I wouldn't necessarily say they come "esay", but they are coming "easier"
+-   I began this workout around Monday or Tuesday, and finished it today (Thursday). Obviously I didn't work on this for the entirety of these days, however. In total, I think spent somewhere between 6 and 8 hours on this project.
+-   The most time consuming part was probably that code bug I mentioned above... I also found the data preprocessing to be quite time consuming, but it ocurred to me while performing the preprrocessing that the majority of data analysis is probably devoted to getting the data to a state in which `R` can read it!
+-   I found the final result quite enjoyable- having a "project" completed feels oddly satisfying.
